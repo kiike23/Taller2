@@ -1,6 +1,7 @@
 package edu.uv.ejemploapp.web;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +20,8 @@ public class HelloController {
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        logger.info("Returning hello view");
-
-        return new ModelAndView("hello.jsp");
+    	String now = (new Date()).toString();
+    	logger.info("Regresando al vista Hello con " + now);
+    	return new ModelAndView("hello.jsp", "now",    	now);
     }
 }
