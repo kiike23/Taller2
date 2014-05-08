@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 06-may-2014 20:27:15 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="edu.uv.model.pojos.Examenesgenerados" table="examenesgenerados" catalog="dbged">
+        <id name="idexamenesGenerados" type="java.lang.Integer">
+            <column name="idexamenesGenerados" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="personal" class="edu.uv.model.pojos.Personal" fetch="select">
+            <column name="Personal_Numero_personal" not-null="true" />
+        </many-to-one>
+        <property name="periodo" type="int">
+            <column name="periodo" not-null="true" />
+        </property>
+        <property name="tipoExam" type="string">
+            <column name="tipoExam" length="30" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="fechaCreacion" length="10" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="100" />
+        </property>
+        <property name="porcTeoria" type="java.lang.Integer">
+            <column name="porcTeoria" />
+        </property>
+        <property name="porcPractica" type="java.lang.Integer">
+            <column name="porcPractica" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="15" not-null="true" />
+        </property>
+        <set name="examenesgeneradosHasPreguntas" inverse="true">
+            <key>
+                <column name="examenesGenerados_idexamenesGenerados" not-null="true" />
+            </key>
+            <one-to-many class="edu.uv.model.pojos.ExamenesgeneradosHasPregunta" />
+        </set>
+    </class>
+</hibernate-mapping>

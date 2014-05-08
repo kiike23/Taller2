@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 06-may-2014 20:27:15 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="edu.uv.model.pojos.Roles" table="roles" catalog="dbged">
+        <id name="idRol" type="java.lang.Integer">
+            <column name="idRol" />
+            <generator class="identity" />
+        </id>
+        <property name="nombreRol" type="string">
+            <column name="nombreRol" length="20" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="Descripcion" length="100" />
+        </property>
+        <set name="usuarioses" inverse="false" table="usuarios_has_roles">
+            <key>
+                <column name="Roles_idRol" not-null="true" />
+            </key>
+            <many-to-many entity-name="edu.uv.model.pojos.Usuarios">
+                <column name="Usuarios_idUsuario" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

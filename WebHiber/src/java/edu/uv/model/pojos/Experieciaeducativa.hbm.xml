@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 06-may-2014 20:27:15 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="edu.uv.model.pojos.Experieciaeducativa" table="experieciaeducativa" catalog="dbged">
+        <id name="idExperieciaEducativa" type="java.lang.Integer">
+            <column name="idExperieciaEducativa" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="academia" class="edu.uv.model.pojos.Academia" fetch="select">
+            <column name="Academia_idAcademia" not-null="true" />
+        </many-to-one>
+        <property name="nombreEe" type="string">
+            <column name="nombreEE" length="60" not-null="true" />
+        </property>
+        <set name="unidadeses" inverse="true">
+            <key>
+                <column name="ExperieciaEducativa_idExperieciaEducativa" not-null="true" />
+            </key>
+            <one-to-many class="edu.uv.model.pojos.Unidades" />
+        </set>
+        <set name="personals" inverse="false" table="personal_has_experieciaeducativa">
+            <key>
+                <column name="ExperieciaEducativa_idExperieciaEducativa" not-null="true" />
+            </key>
+            <many-to-many entity-name="edu.uv.model.pojos.Personal">
+                <column name="Personal_Numero_personal" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

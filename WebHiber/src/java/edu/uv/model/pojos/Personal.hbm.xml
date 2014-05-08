@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 06-may-2014 20:27:15 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="edu.uv.model.pojos.Personal" table="personal" catalog="dbged">
+        <id name="numeroPersonal" type="int">
+            <column name="Numero_personal" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="Nombre" length="60" not-null="true" />
+        </property>
+        <set name="usuarioses" inverse="true">
+            <key>
+                <column name="Personal_Numero_personal" not-null="true" />
+            </key>
+            <one-to-many class="edu.uv.model.pojos.Usuarios" />
+        </set>
+        <set name="academias" inverse="true">
+            <key>
+                <column name="Personal_Numero_personal" not-null="true" />
+            </key>
+            <one-to-many class="edu.uv.model.pojos.Academia" />
+        </set>
+        <set name="experieciaeducativas" inverse="false" table="personal_has_experieciaeducativa">
+            <key>
+                <column name="Personal_Numero_personal" not-null="true" />
+            </key>
+            <many-to-many entity-name="edu.uv.model.pojos.Experieciaeducativa">
+                <column name="ExperieciaEducativa_idExperieciaEducativa" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="examenesgeneradoses" inverse="true">
+            <key>
+                <column name="Personal_Numero_personal" not-null="true" />
+            </key>
+            <one-to-many class="edu.uv.model.pojos.Examenesgenerados" />
+        </set>
+    </class>
+</hibernate-mapping>

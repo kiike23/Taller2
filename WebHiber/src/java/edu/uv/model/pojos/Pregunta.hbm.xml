@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 06-may-2014 20:27:15 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="edu.uv.model.pojos.Pregunta" table="pregunta" catalog="dbged">
+        <id name="idPregunta" type="java.lang.Integer">
+            <column name="idPregunta" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="temas" class="edu.uv.model.pojos.Temas" fetch="select">
+            <column name="temas_idtemas" not-null="true" />
+        </many-to-one>
+        <property name="tipo" type="string">
+            <column name="tipo" length="30" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="100" not-null="true" />
+        </property>
+        <property name="modalidad" type="string">
+            <column name="modalidad" length="20" not-null="true" />
+        </property>
+        <property name="complejidad" type="int">
+            <column name="complejidad" not-null="true" />
+        </property>
+        <property name="puntuacion" type="java.lang.Integer">
+            <column name="puntuacion" />
+        </property>
+        <property name="comentRetroalimentacion" type="string">
+            <column name="ComentRetroalimentacion" length="200" />
+        </property>
+        <set name="examenesgeneradosHasPreguntas" inverse="true">
+            <key>
+                <column name="Pregunta_idPregunta" not-null="true" />
+            </key>
+            <one-to-many class="edu.uv.model.pojos.ExamenesgeneradosHasPregunta" />
+        </set>
+        <set name="respuestases" inverse="true">
+            <key>
+                <column name="Pregunta_idPregunta" not-null="true" />
+            </key>
+            <one-to-many class="edu.uv.model.pojos.Respuestas" />
+        </set>
+    </class>
+</hibernate-mapping>
